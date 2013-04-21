@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>jc-units</string>
+	<key>connections</key>
+	<dict>
+		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Jason Cheatham</string>
+	<key>description</key>
+	<string>Unit converter</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Units</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>u</string>
+				<key>runningsubtext</key>
+				<string>Thinking...</string>
+				<key>script</key>
+				<string>import alfred_convert
+alfred_convert.tell('convert', '{query}')</string>
+				<key>subtext</key>
+				<string>Enter a string like '150lbs to kg'</string>
+				<key>title</key>
+				<string>Convert units</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</string>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Use Google's unofficial calculator API to convert physical values.</string>
+	<key>uidata</key>
+	<dict>
+		<key>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://github.com/jason0x43/jc-units</string>
+</dict>
+</plist>
