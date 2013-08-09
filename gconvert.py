@@ -14,6 +14,7 @@ def convert(value, src_units, dst_units):
     # read and preprocess the response
     resp = urlopen(url).read()
     resp = resp.replace(r'\x', r'\u00')
+    resp = resp.replace('\xa0', '')
     resp = re.sub('([a-z]+):', '"\\1" :', resp)
 
     data = json.loads(resp)
