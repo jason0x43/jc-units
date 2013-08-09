@@ -10,12 +10,22 @@ api = 'http://www.google.com/ig/calculator?hl=en&q={}{}=?{}'
 
 def convert(value, src_units, dst_units):
     url = api.format(value, src_units, dst_units)
-    data = urlopen(url).read().decode('utf-8', 'ignore')
-    # Convert to valid JSON: {foo: "1"} -> {"foo" : "1"}
-    data = re.sub('([a-z]+):', '"\\1" :', data)
-    data = json.loads(data)
+
+    # read and preprocess the response
+    resp = urlopen(url).read()
+    resp = resp.replace(r'\x', r'\u00')
+    resp = re.sub('([a-z]+):', '"\\1" :', resp)
+
+    data = json.loads(resp)
     if len(data['error']) > 0:
         raise Exception(data['error'])
+
+    # postprocess the answer from Google to deal with HTML-formatted scientific
+    # notation
+    rhs = data['rhs']
+    rhs = re.sub(r'\s*&#215;\s*10\s*<sup>-(\d+)</sup>', 'e-\\1', rhs)
+    rhs = re.sub(r'\s*&#215;\s*10\s*<sup>(\d+)</sup>', 'e+\\1', rhs)
+    data['rhs'] = rhs
 
     value = data['rhs'].split(' ')[0]
     value = float(value) if '.' in value else int(value)
