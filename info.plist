@@ -40,6 +40,8 @@
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -53,8 +55,8 @@
 				<key>runningsubtext</key>
 				<string>Thinking...</string>
 				<key>script</key>
-				<string>import alfred_convert
-alfred_convert.tell('convert', '{query}')</string>
+				<string>from alfred_convert import Workflow
+Workflow().tell('convert', '{query}')</string>
 				<key>subtext</key>
 				<string>Enter a string like '150lbs to kg'</string>
 				<key>title</key>
@@ -68,6 +70,8 @@ alfred_convert.tell('convert', '{query}')</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 	</array>
 	<key>readme</key>
