@@ -26,6 +26,8 @@ def convert(value, src_units, dst_units):
     rhs = data['rhs']
     rhs = re.sub(r'\s*&#215;\s*10\s*<sup>-(\d+)</sup>', 'e-\\1', rhs)
     rhs = re.sub(r'\s*&#215;\s*10\s*<sup>(\d+)</sup>', 'e+\\1', rhs)
+    rhs = re.sub(r'<sup>(-?\d+)</sup>&#8260;<sub>(-?\d+)</sub>', '\\1/\\2',
+                 rhs)
     data['rhs'] = rhs
 
     value = data['rhs'].split(' ')[0]
