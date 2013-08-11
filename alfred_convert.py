@@ -4,28 +4,28 @@
 import gconvert as convert
 import logging
 import re
-import jalf
+import jcalfred
 
 
 LOG = logging.getLogger(__name__)
 
 
-class Workflow(jalf.AlfredWorkflow):
+class Workflow(jcalfred.AlfredWorkflow):
     def _convert(self, value, src_units, dst_units):
         try:
             value, text = convert.convert(value, src_units, dst_units)
         except Exception, e:
             if e.message.startswith('Parse error in query'):
-                return [jalf.Item('Waiting for input...')]
+                return [jcalfred.Item('Waiting for input...')]
             else:
                 try:
                     int(e.message)
-                    return [jalf.Item('Waiting for input...')]
+                    return [jcalfred.Item('Waiting for input...')]
                 except:
                     pass
             raise e
 
-        return [jalf.Item(text, arg=value, valid=True,
+        return [jcalfred.Item(text, arg=value, valid=True,
                           subtitle='Action this item to copy {} to the '
                                    'clipboard'.format(value))]
 
@@ -41,7 +41,7 @@ class Workflow(jalf.AlfredWorkflow):
             dst_units = match.group('dst').lower()
             return self._convert(value, src_units, dst_units)
 
-        return [jalf.Item('Waiting for input...')]
+        return [jcalfred.Item('Waiting for input...')]
 
     def do_convert(self, value):
         self.puts(value)
