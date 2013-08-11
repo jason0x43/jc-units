@@ -6,6 +6,17 @@
 	<string>jc-units</string>
 	<key>connections</key>
 	<dict>
+		<key>B6D319E5-AD8C-4CBC-8735-A8B8C686958F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<array>
 			<dict>
@@ -56,7 +67,7 @@
 				<string>Thinking...</string>
 				<key>script</key>
 				<string>from alfred_convert import Workflow
-Workflow().tell('convert', '{query}')</string>
+Workflow().tell('convert_simple', '{query}')</string>
 				<key>subtext</key>
 				<string>Enter a string like '150lbs to kg'</string>
 				<key>title</key>
@@ -64,12 +75,42 @@ Workflow().tell('convert', '{query}')</string>
 				<key>type</key>
 				<integer>3</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>uq</string>
+				<key>runningsubtext</key>
+				<string>Calculating...</string>
+				<key>script</key>
+				<string>from alfred_convert import Workflow
+Workflow().tell('convert', '{query}')</string>
+				<key>subtext</key>
+				<string>Enter a string like '1cm + 1in &gt; cm' or '1in * 1mm'</string>
+				<key>title</key>
+				<string>Open unit conversion</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B6D319E5-AD8C-4CBC-8735-A8B8C686958F</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -82,6 +123,11 @@ Workflow().tell('convert', '{query}')</string>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
+		</dict>
+		<key>B6D319E5-AD8C-4CBC-8735-A8B8C686958F</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<dict>

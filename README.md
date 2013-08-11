@@ -10,10 +10,21 @@
 </p>
 
 This is a really simple workflow that just calls the Google calculator's unit
-converter (http://www.google.com/ig/calculator) with your input. Usage is
-simply:
+converter (http://www.google.com/ig/calculator) with your input. There are two
+modes of operation: simple and query (described below).
 
-`u {value} {in units} {out units}`
+The calculator is called as you type, so you might see a bit of weirdness while
+you're inputing stuff. Just let it settle for a second when you're done
+typing.
+
+Actioning the result will copy the value (just the number) to the clipboard.
+That's it!
+
+### Simple
+
+The simple mode is...simple.
+
+    u {value} {in units} {out units}
 
 You can include a space after the `u` keyword, but it's not required. Units can
 generally be abbreviated or not, as long as the input is unambiguous.  You can
@@ -24,12 +35,21 @@ _out_ units for fun if you like. Some example commands:
 * `u 5k in miles`
 * `u5k mi`
 
-The calculator is called as you type, so you might see a bit of weirdness while
-you're inputing stuff. Just let it settle for a second when you're done
-typing.
+### Query
 
-Actioning the result will copy the value (just the number) to the clipboard.
-That's it!
+The query mode is more freeform.
+
+    uq {input} {> out units}
+
+The `> out units` bit is optional; if you don't specify, Google picks something
+reasonable. This mode of operation lets you do math as well as simple
+conversion, so you can do things like:
+
+    1cm + 1in - 1mm > in
+
+or
+
+    1cm * 1mm > in^2
 
 Installation
 ------------
