@@ -62,7 +62,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>uc</string>
+				<string>u</string>
 				<key>runningsubtext</key>
 				<string>Thinking...</string>
 				<key>script</key>
