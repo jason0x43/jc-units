@@ -30,12 +30,12 @@ class Workflow(jcalfred.AlfredWorkflow):
             raise e
 
         return [jcalfred.Item(text, arg=value, valid=True,
-                              subtitle='Action this item to copy {} to the '
-                                       'clipboard'.format(value))]
+                              subtitle='Action this item to copy %s to the '
+                                       'clipboard' % value)]
 
     def tell_convert_simple(self, query):
         '''Perform a simple conversion query.'''
-        LOG.debug('called with query "{}"'.format(query))
+        LOG.debug('called with query "%s"', query)
 
         # match things like "1cm in ft"
         match = re.match('(?P<value>\d+(\.\d+)?)\s*(?P<src>[a-zA-Z]+)(\s+\w+)?'
@@ -45,14 +45,14 @@ class Workflow(jcalfred.AlfredWorkflow):
             value = float(match.group('value'))
             src_units = match.group('src').lower()
             dst_units = match.group('dst').lower()
-            query = '{}{}>{}'.format(value, src_units, dst_units)
+            query = '%s%s>%s' % (value, src_units, dst_units)
             return self._convert(query)
 
         return [jcalfred.Item('Waiting for input...')]
 
     def tell_convert(self, query):
         '''Perform a general conversion query.'''
-        LOG.debug('called with query "{}"'.format(query))
+        LOG.debug('called with query "%s"', query)
 
         if len(query) == 0:
             return [
