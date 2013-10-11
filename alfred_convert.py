@@ -10,7 +10,7 @@ import jcalfred
 LOG = logging.getLogger(__name__)
 
 
-class Workflow(jcalfred.AlfredWorkflow):
+class Workflow(jcalfred.Workflow):
     def __init__(self):
         super(Workflow, self).__init__()
         #self.log_level = 'DEBUG'
@@ -29,7 +29,7 @@ class Workflow(jcalfred.AlfredWorkflow):
                     pass
             raise e
 
-        return [jcalfred.Item(text, arg=value, valid=True,
+        return [jcalfred.Item(text, arg=str(value), valid=True,
                               subtitle='Action this item to copy %s to the '
                                        'clipboard' % value)]
 
