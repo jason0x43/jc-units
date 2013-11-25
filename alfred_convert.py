@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-import gconvert as convert
+import convert as convert
 import logging
 import re
 import jcalfred
@@ -37,18 +37,10 @@ class Workflow(jcalfred.Workflow):
         '''Perform a simple conversion query.'''
         LOG.debug('called with query "%s"', query)
 
-        # match things like "1cm in ft"
-        match = re.match('(?P<value>\d+(\.\d+)?)\s*(?P<src>[a-zA-Z]+)(\s+\w+)?'
-                         '\s+(?P<dst>[a-zA-Z]+)', query.strip())
-
-        if match:
-            value = float(match.group('value'))
-            src_units = match.group('src').lower()
-            dst_units = match.group('dst').lower()
-            query = '%s%s>%s' % (value, src_units, dst_units)
+        try:
             return self._convert(query)
-
-        return [jcalfred.Item('Waiting for input...')]
+        except:
+            return [jcalfred.Item('Waiting for input...')]
 
     def tell_convert(self, query):
         '''Perform a general conversion query.'''

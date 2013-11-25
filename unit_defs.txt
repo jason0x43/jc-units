@@ -1,0 +1,4 @@
+degC = degK; offset: 273.15 = celsius = C
+degF = 9 / 5 * degK; offset: 255.372222 = fahrenheit = F
+
+hectare = 10000 * m ** 2
