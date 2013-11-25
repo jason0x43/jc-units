@@ -4,7 +4,8 @@ LOG = logging.getLogger(__name__)
 
 # special cases to try, like when a user asks to convert 25 pints to oz
 SPECIAL = {
-    'ounce': 'floz'
+    'ounce': 'floz',
+    'boltzmann_constant': 'km'
 }
 
 def convert(query):
