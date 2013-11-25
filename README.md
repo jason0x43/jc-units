@@ -9,47 +9,33 @@
   <a href="http://dl.dropbox.com/s/kxzv83fkpw7caow/jc-units.alfredworkflow"><img src="http://dl.dropbox.com/s/m823ene4il9cnac/dl_button.png" alt="Download"></a>
 </p>
 
-This is a really simple workflow that just calls the Google calculator's unit
-converter (http://www.google.com/ig/calculator) with your input. There are two
-modes of operation: simple and query (described below).
-
-The calculator is called as you type, so you might see a bit of weirdness while
-you're inputing stuff. Just let it settle for a second when you're done
-typing.
+This is a really simple workflow that uses the <a href="https://github.com/hgrecco/pint">Pint</a>
+unit library to convert an input string. The calculator is called as you type,
+so as soon as you put in something it considers valid, you'll see output.
 
 Actioning the result will copy the value (just the number) to the clipboard.
 That's it!
 
-### Simple
+Basic conversion is performed with a command like:
 
-The simple mode is...simple.
-
-    u {value} {in units} {out units}
+    u {value} {in units} > {out units}
 
 You can include a space after the `u` keyword, but it's not required. Units can
-generally be abbreviated or not, as long as the input is unambiguous.  You can
-also throw an single word ("in", "to", "->", whatever) between the _in_ and
-_out_ units for fun if you like. Some example commands:
+generally be abbreviated or not, as long as the input is unambiguous. A greater
+than sign (>) is required between the input value and output units. Some example
+commands:
 
-* `u 5k to miles`
-* `u 5k in miles`
-* `u5k mi`
+* `u 5k > miles`
+* `u5k>miles`
+* `u5k>mi`
 
-### Query
+You can also do more advanced queries that use unit math, like:
 
-The query mode is more freeform.
-
-    uq {input} {> out units}
-
-The `> out units` bit is optional; if you don't specify, Google picks something
-reasonable. This mode of operation lets you do math as well as simple
-conversion, so you can do things like:
-
-    1cm + 1in - 1mm > in
+    u 1cm + 1in - 1mm > in
 
 or
 
-    1cm * 1mm > in^2
+    u 1cm * 1mm > in^2
 
 Installation
 ------------

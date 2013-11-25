@@ -64,7 +64,7 @@ Workflow().tell('convert_simple', '{query}')</string>
 				<key>type</key>
 				<integer>3</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
