@@ -8,37 +8,53 @@ SPECIAL = {
     'boltzmann_constant': 'km'
 }
 
-def convert(query):
-    from pint import UnitRegistry
-    from pint.unit import DimensionalityError
 
-    ureg = UnitRegistry()
-    ureg.load_definitions('unit_defs.txt')
-    Q_ = ureg.Quantity
+class Converter(object):
+    def __init__(self, definitions=None):
+        from pint import UnitRegistry
 
-    # step 1: split the query into an input value and output units at a '>'
-    in_val, to, out_units = query.partition('>')
+        self.ureg = UnitRegistry()
+        self.ureg.load_definitions('unit_defs.txt')
+        self.load_definitions(definitions)
 
-    in_val = Q_(in_val)
-    out_units = Q_(out_units)
+    def load_definitions(self, definitions):
+        if not definitions:
+            return
 
-    try:
-        out_val = in_val.to(out_units)
-    except DimensionalityError, e:
-        if str(e.units1) in SPECIAL:
-            in_val2 = in_val.magnitude * Q_(SPECIAL[str(e.units1)])
-            out_val = in_val2.to(out_units)
-        elif str(e.units2) in SPECIAL:
-            out_units2 = Q_(SPECIAL[str(e.units2)])
-            out_val = in_val.to(out_units2)
-        else:
-            raise
+        if not isinstance(definitions, (list, tuple)):
+            definitions = [definitions]
+        for d in definitions:
+            LOG.info('loading definitions from %s', d);
+            self.ureg.load_definitions(d)
 
-    LOG.debug(u'converted {0} to {1:P}'.format(in_val, out_val))
+    def convert(self, query):
+        from pint.unit import DimensionalityError
 
-    return (out_val.magnitude, u'{0:P}'.format(out_val))
+        Q_ = self.ureg.Quantity
+
+        # step 1: split the query into an input value and output units at a '>'
+        in_val, to, out_units = query.partition('>')
+
+        in_val = Q_(in_val)
+        out_units = Q_(out_units)
+
+        try:
+            out_val = in_val.to(out_units)
+        except DimensionalityError, e:
+            if str(e.units1) in SPECIAL:
+                in_val2 = in_val.magnitude * Q_(SPECIAL[str(e.units1)])
+                out_val = in_val2.to(out_units)
+            elif str(e.units2) in SPECIAL:
+                out_units2 = Q_(SPECIAL[str(e.units2)])
+                out_val = in_val.to(out_units2)
+            else:
+                raise
+
+        LOG.debug(u'converted {0} to {1:P}'.format(in_val, out_val))
+
+        return (out_val.magnitude, u'{0:P}'.format(out_val))
 
 
 if __name__ == '__main__':
     from sys import argv
-    convert(argv[1])
+    Converter().convert(argv[1])

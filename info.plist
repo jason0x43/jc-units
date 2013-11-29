@@ -55,8 +55,8 @@
 				<key>runningsubtext</key>
 				<string>Thinking...</string>
 				<key>script</key>
-				<string>from alfred_convert import Workflow
-Workflow().tell('convert_simple', '{query}')</string>
+				<string>from alfred_convert import UnitsWorkflow
+UnitsWorkflow().tell('convert', '''{query}''')</string>
 				<key>subtext</key>
 				<string>Enter a string with the format 'from &gt; to', like '150lbs &gt; kg'</string>
 				<key>title</key>
