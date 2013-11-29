@@ -1,3 +1,6 @@
+#
+# This module uses YQL to download the current currency exchange rates from Yahoo! Finance.
+#
 import logging
 import requests
 

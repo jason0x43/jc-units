@@ -50,6 +50,11 @@ Requirements
 * Python 2.7 (standard in Lion and Mountain Lion)
 * My [jcalfred][jcalfred] python library (included in the workflow download)
 
+Credits
+-------
+
+Currency exchange rates are courtesy of Yahoo! Finance.
+
 [pkg]: http://dl.dropbox.com/s/kxzv83fkpw7caow/jc-units.alfredworkflow
 [jcalfred]: https://github.com/jason0x43/jcalfred
 [alfred]: http://www.alfredapp.com

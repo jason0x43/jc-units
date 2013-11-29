@@ -101,9 +101,7 @@ class UnitsWorkflow(Workflow):
         LOG.debug('called with query "%s"', query)
 
         try:
-            items = self._convert(query)
-            items.append(Item(Item.LINE, subtitle='Currency conversion rates courtesy of Yahoo! Finance'))
-            return items
+            return self._convert(query)
         except:
             return [Item('Waiting for input...')]
 
