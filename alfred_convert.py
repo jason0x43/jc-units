@@ -81,6 +81,7 @@ class UnitsWorkflow(Workflow):
                     cf.write('{0} = USD / {1} = {2}\n'.format(k, v, k.lower()))
 
     def _convert(self, query):
+        query = query.strip()
         try:
             value, text = self.converter.convert(query)
         except Exception, e:
