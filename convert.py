@@ -10,12 +10,13 @@ SPECIAL = {
 
 
 class Converter(object):
-    def __init__(self, definitions=None):
+    def __init__(self, definitions=None, separator='>'):
         from pint import UnitRegistry
 
         self.ureg = UnitRegistry()
         self.ureg.load_definitions('unit_defs.txt')
         self.load_definitions(definitions)
+        self.separator = separator
 
     def load_definitions(self, definitions):
         if not definitions:
@@ -32,8 +33,9 @@ class Converter(object):
 
         Q_ = self.ureg.Quantity
 
-        # step 1: split the query into an input value and output units at a '>'
-        in_val, to, out_units = query.partition('>')
+        # step 1: split the query into an input value and output units at a
+        # self.separator
+        in_val, to, out_units = query.partition(self.separator)
 
         in_val = Q_(in_val)
         out_units = Q_(out_units)

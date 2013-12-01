@@ -6,11 +6,30 @@
 	<string>jc-units</string>
 	<key>connections</key>
 	<dict>
+		<key>6C6E45DD-78E0-4686-9FB5-54FCE76834FD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>00EED997-6073-477E-A033-E21D1F734307</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0198087A-AC3F-43B7-9602-05DA77D6B19F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -73,15 +92,101 @@ UnitsWorkflow().tell('convert', '''{query}''')</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>u&gt;</string>
+				<key>script</key>
+				<string>from alfred_convert import UnitsWorkflow
+UnitsWorkflow().tell('command', '''{query}''')</string>
+				<key>subtext</key>
+				<string>Open the config and log files, etc.</string>
+				<key>title</key>
+				<string>Extra commands</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6C6E45DD-78E0-4686-9FB5-54FCE76834FD</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>from alfred_convert import UnitsWorkflow
+UnitsWorkflow().do('command', '''{query}''')</string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>00EED997-6073-477E-A033-E21D1F734307</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>Copied {query} to clipboard</string>
+				<key>title</key>
+				<string>Units</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0198087A-AC3F-43B7-9602-05DA77D6B19F</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Use Google's unofficial calculator API to convert physical values.</string>
 	<key>uidata</key>
 	<dict>
+		<key>00EED997-6073-477E-A033-E21D1F734307</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>0198087A-AC3F-43B7-9602-05DA77D6B19F</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
 		<key>61B5D348-BC31-4DC1-AA7F-C7E967F7A226</key>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
+		</dict>
+		<key>6C6E45DD-78E0-4686-9FB5-54FCE76834FD</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 		<key>ED0CEFE0-FFC2-4F31-9C09-C4CF62EF8FC6</key>
 		<dict>

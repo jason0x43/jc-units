@@ -19,6 +19,7 @@ CURRENCIES = [
     'CNY',
     'CZK',
     'DKK',
+    'EUR',
     'GBP',
     'HKD',
     'HRK',
@@ -49,10 +50,11 @@ CURRENCIES = [
 class UnitsWorkflow(Workflow):
     def __init__(self):
         super(UnitsWorkflow, self).__init__()
-        #self.log_level = 'DEBUG'
         self.currencies_file = os.path.join(self.cache_dir, 'currencies.txt')
         self.load_currencies()
-        self.converter = Converter(self.currencies_file)
+        self.separator = self.config.get('separator') or '>'
+        self.config['separator'] = self.separator
+        self.converter = Converter(self.currencies_file, separator=self.separator)
 
     def load_currencies(self):
         import datetime
@@ -105,6 +107,23 @@ class UnitsWorkflow(Workflow):
         except:
             return [Item('Waiting for input...')]
 
+    def tell_command(self, query=None):
+        return [
+            Item('Open config file...', arg='open|' + self.config_file,
+                valid=True),
+            Item('Open debug log...', arg='open|' + self.log_file,
+                valid=True),
+        ]
+
+    def do_command(self, query=None):
+        '''Open the config file.'''
+        LOG.debug('doing command ' + query)
+        cmd, sep, arg = query.partition('|')
+
+        if cmd == 'open':
+            LOG.debug('opening ' + arg)
+            from subprocess import call
+            call(['open', arg])
 
 if __name__ == '__main__':
     from sys import argv
