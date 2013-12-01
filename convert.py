@@ -8,6 +8,9 @@ SPECIAL = {
     'boltzmann_constant': 'km'
 }
 
+VALUE_PATTERN = r'-?(\d+(\.\d+)?|\.\d+)(e[+-]?\d+)?'
+QUERY_PATTERN = r'^(?P<in_val>{0})\s*(?P<in_units>[a-zA-Z ]*[a-zA-Z]+)\s*{1}\s*(?P<out_units>[a-zA-Z ]*[a-zA-Z])$'
+
 
 class Converter(object):
     def __init__(self, definitions=None, separator='>'):
@@ -30,14 +33,28 @@ class Converter(object):
 
     def convert(self, query):
         from pint.unit import DimensionalityError
+        import re
 
         Q_ = self.ureg.Quantity
 
         # step 1: split the query into an input value and output units at a
         # self.separator
-        in_val, to, out_units = query.partition(self.separator)
+        pattern = QUERY_PATTERN.format(VALUE_PATTERN, self.separator)
+        match = re.match(pattern, query)
 
-        in_val = Q_(in_val)
+        if not match:
+            LOG.warn('Invalid query: "%s"', query)
+            raise Exception('Invalid query')
+
+        LOG.debug('query: %s', query)
+        LOG.debug('in_val: %s', match.group('in_val'))
+        LOG.debug('in_units: %s', match.group('in_units'))
+        LOG.debug('out_units: %s', match.group('out_units'))
+
+        in_units = match.group('in_units').replace(' ', '_')
+        in_val = Q_(match.group('in_val') + in_units)
+
+        out_units = match.group('out_units').replace(' ', '_')
         out_units = Q_(out_units)
 
         try:
@@ -53,7 +70,6 @@ class Converter(object):
                 raise
 
         LOG.debug(u'converted {0} to {1:P}'.format(in_val, out_val))
-
         return (out_val.magnitude, u'{0:P}'.format(out_val))
 
 
