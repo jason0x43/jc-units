@@ -53,8 +53,11 @@ class UnitsWorkflow(Workflow):
         self.currencies_file = os.path.join(self.cache_dir, 'currencies.txt')
         self.load_currencies()
         self.separator = self.config.get('separator') or '>'
+        self.precision = self.config.get('precision') or None
         self.config['separator'] = self.separator
-        self.converter = Converter(self.currencies_file, separator=self.separator)
+        self.config['precision'] = self.precision
+        self.converter = Converter(self.currencies_file,
+            separator=self.separator, precision=self.precision)
 
     def load_currencies(self):
         import datetime
@@ -85,6 +88,7 @@ class UnitsWorkflow(Workflow):
         try:
             value, text = self.converter.convert(query)
         except Exception, e:
+            LOG.exception('Error converting')
             if e.message.startswith('Parse error in query'):
                 return [Item('Waiting for input...')]
             else:

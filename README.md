@@ -44,6 +44,17 @@ To install, just download the [prepackaged workflow][pkg].  Double-click on the
 downloaded file, or drag it into the Alfred Workflows window, and Alfred should
 install it.
 
+
+Configuration
+-------------
+
+Three options can be set in the workflow configuration file (accessible via the 'u>' command):
+
+* separator - separator to use between input value and output units; default is **">"**
+* precision - if set to an integer value, this is the number of digits to include after a decimal point; default is **null**
+* loglevel - what level of messages to send to the debug log; default is **"INFO"**
+
+
 Requirements
 ------------
 

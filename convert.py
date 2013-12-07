@@ -13,13 +13,14 @@ QUERY_PATTERN = r'^(?P<in_val>{0})\s*(?P<in_units>[a-zA-Z ]*[a-zA-Z]+)\s*{1}\s*(
 
 
 class Converter(object):
-    def __init__(self, definitions=None, separator='>'):
+    def __init__(self, definitions=None, separator='>', precision=None):
         from pint import UnitRegistry
 
         self.ureg = UnitRegistry()
         self.ureg.load_definitions('unit_defs.txt')
         self.load_definitions(definitions)
         self.separator = separator
+        self.precision = precision
 
     def load_definitions(self, definitions):
         if not definitions:
@@ -70,7 +71,16 @@ class Converter(object):
                 raise
 
         LOG.debug(u'converted {0} to {1:P}'.format(in_val, out_val))
-        return (out_val.magnitude, u'{0:P}'.format(out_val))
+
+        magnitude = out_val.magnitude
+        units = out_val.units
+
+        if self.precision:
+            from decimal import Decimal
+            rval = Decimal('1.' + '0'*self.precision)
+            magnitude = Decimal(out_val.magnitude).quantize(rval)
+
+        return (magnitude, u'{0} {1}'.format(magnitude, units))
 
 
 if __name__ == '__main__':
