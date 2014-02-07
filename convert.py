@@ -8,9 +8,6 @@ SPECIAL = {
     'boltzmann_constant': 'km'
 }
 
-VALUE_PATTERN = r'-?(\d+(\.\d+)?|\.\d+)(e[+-]?\d+)?'
-QUERY_PATTERN = r'^(?P<in_val>{0})\s*(?P<in_units>[a-zA-Z ]*[a-zA-Z]+)\s*{1}\s*(?P<out_units>[a-zA-Z ]*[a-zA-Z])$'
-
 
 class Converter(object):
     def __init__(self, definitions=None, separator='>', precision=None):
@@ -29,7 +26,7 @@ class Converter(object):
         if not isinstance(definitions, (list, tuple)):
             definitions = [definitions]
         for d in definitions:
-            LOG.info('loading definitions from %s', d);
+            LOG.info('loading definitions from %s', d)
             self.ureg.load_definitions(d)
 
     def convert(self, query):
@@ -40,23 +37,16 @@ class Converter(object):
 
         # step 1: split the query into an input value and output units at a
         # self.separator
-        pattern = QUERY_PATTERN.format(VALUE_PATTERN, self.separator)
-        match = re.match(pattern, query)
-
-        if not match:
-            LOG.warn('Invalid query: "%s"', query)
-            raise Exception('Invalid query')
+        value, sep, units = query.partition(self.separator)
+        value = re.sub(r'(\w) (\w)', r'\1_\2', value.strip())
+        units = re.sub(r'(\w) (\w)', r'\1_\2', units.strip())
 
         LOG.debug('query: %s', query)
-        LOG.debug('in_val: %s', match.group('in_val'))
-        LOG.debug('in_units: %s', match.group('in_units'))
-        LOG.debug('out_units: %s', match.group('out_units'))
+        LOG.debug('input: %s', value)
+        LOG.debug('units: %s', units)
 
-        in_units = match.group('in_units').replace(' ', '_')
-        in_val = Q_(match.group('in_val') + in_units)
-
-        out_units = match.group('out_units').replace(' ', '_')
-        out_units = Q_(out_units)
+        in_val = Q_(value)
+        out_units = Q_(units.replace(' ', '_'))
 
         try:
             out_val = in_val.to(out_units)
@@ -85,4 +75,4 @@ class Converter(object):
 
 if __name__ == '__main__':
     from sys import argv
-    Converter().convert(argv[1])
+    print Converter().convert(argv[1])
