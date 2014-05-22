@@ -83,7 +83,7 @@ UnitsWorkflow().tell('convert', '''{query}''')</string>
 				<key>type</key>
 				<integer>3</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>

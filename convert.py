@@ -38,7 +38,7 @@ class Converter(object):
         # step 1: split the query into an input value and output units at a
         # self.separator
         value, sep, units = query.partition(self.separator)
-        value = re.sub(r'(\w) (\w)', r'\1_\2', value.strip())
+        value = re.sub(r'([A-Za-z]) ([A-Za-z])', r'\1_\2', value.strip())
         units = re.sub(r'(\w) (\w)', r'\1_\2', units.strip())
 
         LOG.debug('query: %s', query)
