@@ -1,6 +1,8 @@
 [Alfred 2][alfred] Workflow for unit conversion
 ===============================================
 
+**Note: This project is no longer actively maintained.**
+
 <p align="center">
 <img alt="Screenshot" src="http://dl.dropbox.com/s/gmep3v3hc5tvn57/jc-units_screenshot.png" />
 </p>
